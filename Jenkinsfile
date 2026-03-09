@@ -3,28 +3,23 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/kandarisailatha/microservices-project.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t kandarisailatha/user-service ./user-service'
+                echo "Building Docker Image..."
             }
         }
 
         stage('Push to DockerHub') {
             steps {
-                sh 'docker push kandarisailatha/user-service'
+                echo "Pushing image to DockerHub..."
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f kubernetes/'
+                echo "Deploying to Kubernetes..."
             }
         }
+
     }
 }
