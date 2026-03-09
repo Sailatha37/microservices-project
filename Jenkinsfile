@@ -5,19 +5,19 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker Image..."
+                sh 'docker build -t sailatha/product-service ./product-service'
             }
         }
 
         stage('Push to DockerHub') {
             steps {
-                echo "Pushing image to DockerHub..."
+                sh 'docker push sailatha/product-service'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                echo "Deploying to Kubernetes..."
+                sh 'kubectl apply -f kubernetes/'
             }
         }
 
